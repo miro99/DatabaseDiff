@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28010.2046
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbDiff", "DbDiff\DbDiff.csproj", "{4D703304-B96C-4EC8-966B-703ECC27BA1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbDiffTest", "DbDiffTest\DbDiffTest.csproj", "{A4060715-D650-480A-89C4-6F08CF55F4E2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbDiffTest", "DbDiffTest\DbDiffTest.csproj", "{5465F7AC-F6D1-497E-98B1-627D7B142D4B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{4D703304-B96C-4EC8-966B-703ECC27BA1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D703304-B96C-4EC8-966B-703ECC27BA1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D703304-B96C-4EC8-966B-703ECC27BA1D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A4060715-D650-480A-89C4-6F08CF55F4E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A4060715-D650-480A-89C4-6F08CF55F4E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A4060715-D650-480A-89C4-6F08CF55F4E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A4060715-D650-480A-89C4-6F08CF55F4E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5465F7AC-F6D1-497E-98B1-627D7B142D4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5465F7AC-F6D1-497E-98B1-627D7B142D4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5465F7AC-F6D1-497E-98B1-627D7B142D4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5465F7AC-F6D1-497E-98B1-627D7B142D4B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
