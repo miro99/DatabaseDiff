@@ -22,25 +22,25 @@ namespace DbDiffTest
             Assert.Throws<ArgumentException>(() => tablesInDatabase = new MySqlTablesInDatabase(dbConnection));
         }
 
-    [Test]
-    public void MySqlTablesInDatabaseTest_Constructor_Does_Not_Throw_ArgumentException_With_Valid_Connection()
-    {
-        IDbConnection mockConnection = Mock.Of<IDbConnection>();
-        TablesInDatabase tablesInDatabase = new MySqlTablesInDatabase(mockConnection);
+        [Test]
+        public void MySqlTablesInDatabaseTest_Constructor_Does_Not_Throw_ArgumentException_With_Valid_Connection()
+        {
+            IDbConnection mockConnection = Mock.Of<IDbConnection>();
+            TablesInDatabase tablesInDatabase = new MySqlTablesInDatabase(mockConnection);
+        }
+
+        [Test]
+        public void MySqlTablesInDatabaseTest_GetTables_Returns_Tables_In_Database()
+        {
+            //Arrange
+            IDbConnection mockConnection = Mock.Of<IDbConnection>();
+            TablesInDatabase tablesInDatabase = new MySqlTablesInDatabase(mockConnection);
+
+            //Act
+            IEnumerable<Table> tables = tablesInDatabase.GetAllTables();
+
+            //Assert
+            Assert.IsTrue(tables.SequenceEqual(new List<Table> { new Table("table1") }));
+        }
     }
-
-    [Test]
-    public void MySqlTablesInDatabaseTest_GetTables_Returns_Tables_In_Database()
-    {
-        //Arrange
-        IDbConnection mockConnection = Mock.Of<IDbConnection>();
-        TablesInDatabase tablesInDatabase = new MySqlTablesInDatabase(mockConnection);
-
-        //Act
-        IEnumerable<Table> tables = tablesInDatabase.GetAllTables();
-
-        //Assert
-        Assert.IsTrue(tables.SequenceEqual(new List<Table> { new Table("table1") }));
-    }
-}
 }
