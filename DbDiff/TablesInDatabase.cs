@@ -9,29 +9,58 @@ using System.Threading.Tasks;
 namespace DbDiff
 {
     public class TablesInDatabase
-    {
-        private readonly IDataReader DataReader;
-
-        public TablesInDatabase(IDataReader dbReader)
+    {   
+        IEnumerable<Table> _AllTables;
+        public IEnumerable<Table> AllTables
         {
-            DataReader = dbReader;            
+            get
+            {
+                return _AllTables;
+            }
         }
 
-        public IEnumerable<Table> GetAllTables()
+        public TablesInDatabase()
+        {            
+        }
+
+        public void InitializeTables(IDataReader dataReader)
         {
             List<Table> tables = new List<Table>();
-            while (DataReader.Read())
+            while (dataReader.Read())
             {
-                Table table = InitializeTableFromReader(DataReader);
+                Table table = InitializeTableFromReader(dataReader);
                 tables.Add(table);
             }
-            return tables;
+            _AllTables = tables;            
         }
 
         private Table InitializeTableFromReader(IDataReader dataReader)
         {
             Table table = new Table(dataReader.GetString(0));
             return table;
+        }
+
+        public IEnumerable<Table> ListMissingTables(TablesInDatabase tablesInDB2)
+        {
+            if ((this.AllTables == null) || (tablesInDB2.AllTables == null))
+            {
+                throw new Exception("TablesInDatabase class must be initialized before use");
+            }
+
+            if (this.AllTables.Count() == 0)
+            {
+                throw new Exception("Database of record must have tables defined");
+            }
+
+            List<Table> missingTables = new List<Table>(this.AllTables.Count());
+            foreach (var table in this.AllTables)
+            {
+                if (tablesInDB2.AllTables.Contains(table) == false)
+                {
+                    missingTables.Add(table);
+                }
+            }
+            return missingTables;
         }
     }
 }
