@@ -1,16 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using MySql.Data.MySqlClient;
+using System.Collections.Generic;
 using System.Data;
 
 namespace DbDiff
 {
-    public class MySqlTablesInDatabase : TablesInDatabase
+    public class MySqlTablesInDatabase : TablesInDatabase<MySqlCommand, MySqlConnection>
     {
-        public MySqlTablesInDatabase(IDbConnection connection) : base(connection)
+        IEnumerable<Table> AllTables;
+
+        public MySqlTablesInDatabase(MySqlConnection connection) : base(connection)
         {
         }
 
-        public override IEnumerable<Table> GetAllTables()
+        public override IEnumerable<Table> GetAllTables(MySqlCommand getAllTablesCommand)
         {
+            
             throw new System.NotImplementedException();
         }
     }

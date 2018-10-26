@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace DbDiff
 {
-    public abstract class TablesInDatabase
+    public abstract class TablesInDatabase<T,C> : IDisposable where T : IDbCommand where C : IDbConnection
     {
         private IDbConnection dbConnection;
 
-        public TablesInDatabase(IDbConnection connection)
+        public TablesInDatabase(C connection)
         {
             if (connection == null)
             {
@@ -21,6 +21,14 @@ namespace DbDiff
             dbConnection = connection;
         }
 
-        public abstract IEnumerable<Table> GetAllTables();        
+        public void Dispose()
+        {
+            if (dbConnection != null)
+            {
+                dbConnection.Close();
+            }
+        }
+
+        public abstract IEnumerable<Table> GetAllTables(T getAllTablesCommand);        
     }
 }
