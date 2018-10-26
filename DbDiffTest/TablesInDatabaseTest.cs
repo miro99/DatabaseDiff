@@ -19,7 +19,7 @@ namespace DbDiffTest
         {
             DbConnection dbConnection = null;
             TablesInDatabase tablesInDatabase;
-            Assert.Throws<ArgumentException>(() => tablesInDatabase = new MySqlTablesInDatabaseTest(dbConnection));
+            Assert.Throws<ArgumentException>(() => tablesInDatabase = new MySqlTablesInDatabase(dbConnection));
         }
 
     [Test]
