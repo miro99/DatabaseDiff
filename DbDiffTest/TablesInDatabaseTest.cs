@@ -1,5 +1,6 @@
 ﻿using DbDiff;
 using Moq;
+using MySql.Data.MySqlClient;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -12,29 +13,23 @@ using System.Threading.Tasks;
 namespace DbDiffTest
 {
     [TestFixture]
-    class MySqlTablesInDatabaseTest
-    {
+    class TablesInDatabaseTest
+    {         
         [Test]
-        public void MySqlTablesInDatabaseTest_Constructor_DbConnection_Parameter_Cannot_Be_Null()
-        {
-            DbConnection dbConnection = null;
-            TablesInDatabase tablesInDatabase;
-            Assert.Throws<ArgumentException>(() => tablesInDatabase = new MySqlTablesInDatabase(dbConnection));
-        }
-
-        [Test]
-        public void MySqlTablesInDatabaseTest_Constructor_Does_Not_Throw_ArgumentException_With_Valid_Connection()
-        {
-            IDbConnection mockConnection = Mock.Of<IDbConnection>();
-            TablesInDatabase tablesInDatabase = new MySqlTablesInDatabase(mockConnection);
-        }
-
-        [Test]
-        public void MySqlTablesInDatabaseTest_GetTables_Returns_Tables_In_Database()
+        public void TablesInDatabaseTest_GetTables_Returns_Tables_In_Database()
         {
             //Arrange
-            IDbConnection mockConnection = Mock.Of<IDbConnection>();
-            TablesInDatabase tablesInDatabase = new MySqlTablesInDatabase(mockConnection);
+            var mockDataReader = new Mock<IDataReader>(MockBehavior.Strict);
+            bool readToggle = true;
+            mockDataReader
+                .Setup(x => x.Read())
+                .Returns(() => readToggle)
+                .Callback(() => readToggle = false);
+
+            mockDataReader.Setup(x => x.GetString(0))
+                .Returns("table1");
+
+            TablesInDatabase tablesInDatabase = new TablesInDatabase(mockDataReader.Object);
 
             //Act
             IEnumerable<Table> tables = tablesInDatabase.GetAllTables();

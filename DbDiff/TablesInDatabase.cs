@@ -8,27 +8,30 @@ using System.Threading.Tasks;
 
 namespace DbDiff
 {
-    public abstract class TablesInDatabase<T,C> : IDisposable where T : IDbCommand where C : IDbConnection
+    public class TablesInDatabase
     {
-        private IDbConnection dbConnection;
+        private readonly IDataReader DataReader;
 
-        public TablesInDatabase(C connection)
+        public TablesInDatabase(IDataReader dbReader)
         {
-            if (connection == null)
-            {
-                throw new ArgumentException("connection parameter cannot be null");
-            }
-            dbConnection = connection;
+            DataReader = dbReader;            
         }
 
-        public void Dispose()
+        public IEnumerable<Table> GetAllTables()
         {
-            if (dbConnection != null)
+            List<Table> tables = new List<Table>();
+            while (DataReader.Read())
             {
-                dbConnection.Close();
+                Table table = InitializeTableFromReader(DataReader);
+                tables.Add(table);
             }
+            return tables;
         }
 
-        public abstract IEnumerable<Table> GetAllTables(T getAllTablesCommand);        
+        private Table InitializeTableFromReader(IDataReader dataReader)
+        {
+            Table table = new Table(dataReader.GetString(0));
+            return table;
+        }
     }
 }

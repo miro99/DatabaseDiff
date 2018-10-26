@@ -2,11 +2,25 @@
 {
     public class Table
     {
-        private string v;
+        private readonly string tableName;
 
-        public Table(string v)
+        public Table(string tableName)
         {
-            this.v = v;
+            this.tableName = tableName;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj.GetType() != typeof(Table))
+            {
+                return false;
+            }
+            return this.tableName.Equals(((Table)obj).tableName);
+        }
+
+        public override int GetHashCode()
+        {
+            return tableName.GetHashCode();
         }
     }
 }
