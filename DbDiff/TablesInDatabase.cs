@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DbDiff
 {
-    public class TablesInDatabase
+    public abstract class TablesInDatabase
     {
         private IDbConnection dbConnection;
 
@@ -21,9 +21,6 @@ namespace DbDiff
             dbConnection = connection;
         }
 
-        public IEnumerable<Table> GetAllTables()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract IEnumerable<Table> GetAllTables();        
     }
 }
