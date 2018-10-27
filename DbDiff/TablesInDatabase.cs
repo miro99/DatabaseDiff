@@ -19,7 +19,7 @@ namespace DbDiff
         {            
         }
 
-        public IEnumerable<INamed> ListMissingTableNames(TablesInDatabase tablesInDB2, Func<IEnumerable<INamed>,IEnumerable<INamed>, IEnumerable<INamed>> diffFunction)
+        public IEnumerable<INamed> ListMissingItemNames(TablesInDatabase tablesInDB2, Func<IEnumerable<INamed>,IEnumerable<INamed>, IEnumerable<INamed>> diffFunction)
         {
             if ((this.AllItems == null) || (tablesInDB2.AllItems == null))
             {
