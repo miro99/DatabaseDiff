@@ -19,9 +19,6 @@ namespace DbDiff
             _AllItems = tables;
         }
 
-        private T InitializeItemFromReader(IDataReader dataReader)
-        {
-            throw new NotImplementedException();
-        }
+        protected abstract T InitializeItemFromReader(IDataReader dataReader);
     }
 }
