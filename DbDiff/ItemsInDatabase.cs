@@ -36,6 +36,19 @@ namespace DbDiff
             return missingTables;
         }
 
+        public static IEnumerable<T> GetDiff(IEnumerable<T> copyOfRecord, IEnumerable<T> itemsToCheckAgainst)
+        {
+            List<T> missingItems = new List<T>(copyOfRecord.Count());
+            foreach (var item in copyOfRecord)
+            {
+                if (itemsToCheckAgainst.Contains(item) == false)
+                {
+                    missingItems.Add(item);
+                }
+            }
+            return missingItems;
+        }
+
         protected abstract T InitializeItemFromReader(IDataReader dataReader);
     }
 }
