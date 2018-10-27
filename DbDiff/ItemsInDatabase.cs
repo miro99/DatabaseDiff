@@ -32,7 +32,6 @@ namespace DbDiff
                 throw new Exception("Database of record must have tables defined");
             }
 
-            //IEnumerable<T> missingTables = diffFunction(_AllItems, itemsInDB2._AllItems);
             IEnumerable<T> missingTables = GetDiff(_AllItems, itemsInDB2._AllItems);
             return missingTables;
         }
