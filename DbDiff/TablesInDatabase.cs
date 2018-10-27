@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace DbDiff
 {
-    public class TablesInDatabase
+    public class TablesInDatabase : ItemsInDatabase
     {
         IEnumerable<Table> _AllTables;
         public IEnumerable<Table> AllTables
