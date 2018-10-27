@@ -6,7 +6,7 @@ namespace DbDiff
 {
     public abstract class ItemsInDatabase<T>
     {
-        IEnumerable<T> _AllItems;
+        protected IEnumerable<T> _AllItems;
 
         public void InitializeItems(IDataReader dataReader)
         {

@@ -29,7 +29,7 @@ namespace DbDiffTest
                 .Setup(x => x.GetString(0))
                 .Returns(tableName);
 
-            tablesInDatabase.InitializeTables(mockDataReader.Object);
+            tablesInDatabase.InitializeItems(mockDataReader.Object);
 
             return tablesInDatabase;
         }
@@ -54,10 +54,10 @@ namespace DbDiffTest
             TablesInDatabase tablesInDatabase = new TablesInDatabase();
 
             //Act
-            tablesInDatabase.InitializeTables(mockDataReader.Object);
+            tablesInDatabase.InitializeItems(mockDataReader.Object);
 
             //Assert
-            Assert.IsTrue(tablesInDatabase.AllTables.SequenceEqual(new List<Table> { new Table("table1") }));            
+            Assert.IsTrue(tablesInDatabase.AllItems.SequenceEqual(new List<Table> { new Table("table1") }));            
         }
 
         [Test]

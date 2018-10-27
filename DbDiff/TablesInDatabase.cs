@@ -7,12 +7,11 @@ namespace DbDiff
 {
     public class TablesInDatabase : ItemsInDatabase<Table>
     {
-        IEnumerable<Table> _AllTables;
-        public IEnumerable<Table> AllTables
+        public IEnumerable<Table> AllItems
         {
             get
             {
-                return _AllTables;
+                return _AllItems;
             }
         }
 
@@ -20,30 +19,19 @@ namespace DbDiff
         {            
         }
 
-        public void InitializeTables(IDataReader dataReader)
-        {
-            List<Table> tables = new List<Table>();
-            while (dataReader.Read())
-            {                
-                Table table = InitializeItemFromReader(dataReader);
-                tables.Add(table);
-            }
-            _AllTables = tables;            
-        }
-
         public IEnumerable<INamed> ListMissingTableNames(TablesInDatabase tablesInDB2, Func<IEnumerable<INamed>,IEnumerable<INamed>, IEnumerable<INamed>> diffFunction)
         {
-            if ((this.AllTables == null) || (tablesInDB2.AllTables == null))
+            if ((this.AllItems == null) || (tablesInDB2.AllItems == null))
             {
                 throw new Exception("TablesInDatabase class must be initialized before use");
             }
 
-            if (this.AllTables.Count() == 0)
+            if (this.AllItems.Count() == 0)
             {
                 throw new Exception("Database of record must have tables defined");
             }
 
-            IEnumerable<INamed> missingTables = diffFunction(this.AllTables, tablesInDB2.AllTables);
+            IEnumerable<INamed> missingTables = diffFunction(this.AllItems, tablesInDB2.AllItems);
             return missingTables;
         }
 
