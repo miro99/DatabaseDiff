@@ -1,12 +1,19 @@
 ﻿namespace DbDiff
 {
-    public class Table
+    public class Table : INamed
     {
-        private readonly string tableName;
+        private readonly string _Name;
+        public string Name
+        {
+            get
+            {
+                return _Name;
+            }            
+        }
 
         public Table(string tableName)
         {
-            this.tableName = tableName;
+            this._Name = tableName;
         }
 
         public override bool Equals(object obj)
@@ -15,12 +22,12 @@
             {
                 return false;
             }
-            return this.tableName.Equals(((Table)obj).tableName);
+            return this.Name.Equals(((Table)obj).Name);
         }
 
         public override int GetHashCode()
         {
-            return tableName.GetHashCode();
+            return Name.GetHashCode();
         }
     }
 }

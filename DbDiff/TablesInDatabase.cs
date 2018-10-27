@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace DbDiff
 {
     public class TablesInDatabase
-    {   
+    {
         IEnumerable<Table> _AllTables;
         public IEnumerable<Table> AllTables
         {
@@ -40,7 +40,7 @@ namespace DbDiff
             return table;
         }
 
-        public IEnumerable<Table> ListMissingTables(TablesInDatabase tablesInDB2)
+        public IEnumerable<INamed> ListMissingTableNames(TablesInDatabase tablesInDB2, Func<IEnumerable<INamed>,IEnumerable<INamed>, IEnumerable<INamed>> diffFunction)
         {
             if ((this.AllTables == null) || (tablesInDB2.AllTables == null))
             {
@@ -52,15 +52,8 @@ namespace DbDiff
                 throw new Exception("Database of record must have tables defined");
             }
 
-            List<Table> missingTables = new List<Table>(this.AllTables.Count());
-            foreach (var table in this.AllTables)
-            {
-                if (tablesInDB2.AllTables.Contains(table) == false)
-                {
-                    missingTables.Add(table);
-                }
-            }
+            IEnumerable<INamed> missingTables = diffFunction(this.AllTables, tablesInDB2.AllTables);
             return missingTables;
-        }
+        }       
     }
 }
