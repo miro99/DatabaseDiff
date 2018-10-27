@@ -68,7 +68,7 @@ namespace DbDiffTest
             TablesInDatabase tablesInDB2 = ArrangeTablesInDatabaseObject("table2");
 
             //Act
-            IEnumerable<INamed> missingTableNames = tablesInDB1.ListMissingItemNames(tablesInDB2, Diff.GetDiff);
+            IEnumerable<INamed> missingTableNames = tablesInDB1.ListMissingItemNames(tablesInDB2);
 
             //Assert
             Assert.IsTrue(missingTableNames.SequenceEqual(new List<INamed> { new Table("table1") }));
@@ -82,7 +82,7 @@ namespace DbDiffTest
             TablesInDatabase tablesInDatabase2 = new TablesInDatabase();
 
             //ActAndAssert
-            Assert.Throws<Exception>(() => tablesInDatabase1.ListMissingItemNames(tablesInDatabase2, Diff.GetDiff));            
+            Assert.Throws<Exception>(() => tablesInDatabase1.ListMissingItemNames(tablesInDatabase2));            
         }
 
         [Test]
@@ -92,7 +92,7 @@ namespace DbDiffTest
             TablesInDatabase tablesInDB1 = ArrangeTablesInDatabaseObject("");
             TablesInDatabase tablesInDB2 = ArrangeTablesInDatabaseObject("table2");
             
-            Assert.Throws<Exception>(() => tablesInDB1.ListMissingItemNames(tablesInDB2, Diff.GetDiff));
+            Assert.Throws<Exception>(() => tablesInDB1.ListMissingItemNames(tablesInDB2));
         }
     }
 }
