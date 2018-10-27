@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace DbDiff
 {
-    public class TablesInDatabase : ItemsInDatabase
+    public class TablesInDatabase : ItemsInDatabase<Table>
     {
         IEnumerable<Table> _AllTables;
         public IEnumerable<Table> AllTables
@@ -24,17 +24,11 @@ namespace DbDiff
         {
             List<Table> tables = new List<Table>();
             while (dataReader.Read())
-            {
-                Table table = InitializeTableFromReader(dataReader);
+            {                
+                Table table = InitializeItemFromReader(dataReader);
                 tables.Add(table);
             }
             _AllTables = tables;            
-        }
-
-        private Table InitializeTableFromReader(IDataReader dataReader)
-        {
-            Table table = new Table(dataReader.GetString(0));
-            return table;
         }
 
         public IEnumerable<INamed> ListMissingTableNames(TablesInDatabase tablesInDB2, Func<IEnumerable<INamed>,IEnumerable<INamed>, IEnumerable<INamed>> diffFunction)
@@ -51,6 +45,12 @@ namespace DbDiff
 
             IEnumerable<INamed> missingTables = diffFunction(this.AllTables, tablesInDB2.AllTables);
             return missingTables;
-        }       
+        }
+
+        protected override Table InitializeItemFromReader(IDataReader dataReader)
+        {
+            Table table = new Table(dataReader.GetString(0));
+            return table;
+        }
     }
 }
