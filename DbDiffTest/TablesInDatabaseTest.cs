@@ -32,33 +32,7 @@ namespace DbDiffTest
             tablesInDatabase.InitializeItems(mockDataReader.Object);
 
             return tablesInDatabase;
-        }
-
-        [Test]
-        public void TablesInDatabaseTest_GetTables_Returns_Tables_In_Database()
-        {
-            //Arrange
-            var mockDataReader = new Mock<IDataReader>(MockBehavior.Strict);
-            bool readToggle = true;
-            
-            mockDataReader
-                .Setup(x => x.Read())
-                .Returns(() => readToggle)
-                .Callback(() => {
-                        readToggle = false; 
-                });
-
-            mockDataReader.Setup(x => x.GetString(0))
-                .Returns("table1");
-
-            TablesInDatabase tablesInDatabase = new TablesInDatabase();
-
-            //Act
-            tablesInDatabase.InitializeItems(mockDataReader.Object);
-
-            //Assert
-            Assert.IsTrue(tablesInDatabase.AllItems.SequenceEqual(new List<Table> { new Table("table1") }));            
-        }
+        }        
 
         [Test]
         public void TablesInDatabaseTest_ListMissingTables_Method_Returns_Table_Names_That_Are_In_The_Calling_Object_And_Not_In_The_Ojbect_Passed_In()
