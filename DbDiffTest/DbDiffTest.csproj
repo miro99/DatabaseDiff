@@ -63,6 +63,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ItemsInDatabaseTest.cs" />
+    <Compile Include="MockINamed.cs" />
+    <Compile Include="MockItemsInDatabase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TablesInDatabaseTest.cs" />
   </ItemGroup>
