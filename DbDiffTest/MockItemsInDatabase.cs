@@ -12,7 +12,11 @@ namespace DbDiffTest
     {
         protected override MockINamed InitializeItemFromReader(IDataReader dataReader)
         {
-            throw new NotImplementedException();
+            var mockINamed = new MockINamed
+            {
+                Name = "Mock INamed"
+            };
+            return mockINamed;
         }
     }
 }
