@@ -9,6 +9,18 @@ namespace DbDiffTest
 {
     public class MockINamed : INamed
     {
-        public string Name => "INamed Mock";
+        private string _Name;
+        public string Name
+        {
+            get
+            {
+                return _Name;
+            }
+
+            set
+            {
+                _Name = value;
+            }
+        }
     }
 }
