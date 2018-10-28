@@ -17,7 +17,7 @@ namespace DbDiffTest
             bool readToggle = true;
 
             mockDataReader.Setup(x => x.Read())
-                .Returns(readToggle)
+                .Returns(() => readToggle)
                 .Callback(() => { readToggle = false; });
 
             mockDataReader.Setup(x => x.GetString(0))
