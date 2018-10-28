@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Moq;
+using NUnit.Framework;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Moq;
-using NUnit.Framework;
 
 namespace DbDiffTest
 {
@@ -22,7 +18,7 @@ namespace DbDiffTest
 
             mockDataReader.Setup(x => x.Read())
                 .Returns(readToggle)
-                .Callback(() => readToggle = false);
+                .Callback(() => { readToggle = false; });
 
             mockDataReader.Setup(x => x.GetString(0))
                 .Returns("INamed Test");
