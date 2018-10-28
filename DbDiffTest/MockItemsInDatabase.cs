@@ -10,6 +10,14 @@ namespace DbDiffTest
 {
     public class MockItemsInDatabase : ItemsInDatabase<MockINamed>
     {
+        public IEnumerable<MockINamed> AllItems
+        {
+            get
+            {
+                return this._AllItems;
+            }
+        }
+
         protected override MockINamed InitializeItemFromReader(IDataReader dataReader)
         {
             var mockINamed = new MockINamed
