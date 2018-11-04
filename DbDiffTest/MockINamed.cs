@@ -22,5 +22,19 @@ namespace DbDiffTest
                 _Name = value;
             }
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj.GetType() != typeof(MockINamed))
+            {
+                return false;
+            }
+            return this.Name.Equals(((MockINamed)obj).Name);
+        }
+
+        public override int GetHashCode()
+        {
+            return Name.GetHashCode();
+        }
     }
 }

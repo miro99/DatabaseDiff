@@ -35,20 +35,6 @@ namespace DbDiffTest
         }        
 
         [Test]
-        public void TablesInDatabaseTest_ListMissingTables_Method_Returns_Table_Names_That_Are_In_The_Calling_Object_And_Not_In_The_Ojbect_Passed_In()
-        {
-            //Arrange           
-            TablesInDatabase tablesInDB1 = ArrangeTablesInDatabaseObject("table1");
-            TablesInDatabase tablesInDB2 = ArrangeTablesInDatabaseObject("table2");
-
-            //Act
-            IEnumerable<INamed> missingTableNames = tablesInDB1.ListMissingItemNames(tablesInDB2);
-
-            //Assert
-            Assert.IsTrue(missingTableNames.SequenceEqual(new List<INamed> { new Table("table1") }));
-        }
-
-        [Test]
         public void TablesInDatabaseTest_ListMissingTables_Method_Throws_Exception_When_Caller_Is_Not_Initialzied()
         {
             //Arrange

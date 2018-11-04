@@ -22,7 +22,7 @@ namespace DbDiffTest
         {
             var mockINamed = new MockINamed
             {
-                Name = "Mock INamed"
+                Name = dataReader.GetString(0)
             };
             return mockINamed;
         }
